@@ -23,7 +23,6 @@ func Login(c *gin.Context) {
 
 	name_input := c.Query("Name")
 	pasword_input := c.Query("Password")
-	fmt.Println("Function Login, Name User = ", name_input, " , pass = ", pasword_input)
 
 	row, err := db.Query("SELECT * FROM users WHERE Name=? AND Password=?", name_input, pasword_input)
 	if err != nil {

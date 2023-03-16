@@ -35,7 +35,6 @@ func GetMovie(c *gin.Context) {
 	defer db.Close()
 
 	idMovie := c.Query("ID")
-	fmt.Print("Function GetMovieNormal, idMovie = ", idMovie)
 
 	row, err := db.Query("SELECT * FROM movie WHERE id=?", idMovie)
 	if err != nil {
@@ -96,17 +95,12 @@ func UpdateMovie(c *gin.Context) {
 		return
 	}
 
-	fmt.Println(movie.ID, movie.Title, movie.Duration, movie.Language)
-
 	result, err := db.Exec("UPDATE movie SET title=?, duration=?, language=? WHERE id=?",
 		movie.Title,
 		movie.Duration,
 		movie.Language,
 		movie.ID,
 	)
-
-	fmt.Println("result : ", result)
-	fmt.Println("err : ", err)
 
 	num, _ := result.RowsAffected()
 
@@ -129,7 +123,6 @@ func DeleteMovie(c *gin.Context) {
 
 	var movie Movie
 	idMovie := c.Query("ID")
-	fmt.Println("idMovie = ", idMovie)
 
 	if err := c.Bind(&movie); err != nil {
 		fmt.Print(err)
