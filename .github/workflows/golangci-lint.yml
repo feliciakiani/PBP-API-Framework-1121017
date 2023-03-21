@@ -23,8 +23,6 @@ jobs:
           cache: false
       - name: Preparation
         uses: actions/checkout@v3
-      - name: Create Go Mod
-        run: go mod init github.com/feliciakiani/PBP-API-Framework-1121017
       - name: Install Dependencies
         run: go clean -modcache && GO111MODULE=on go mod tidy -compat=1.17
       - name: golangci-lint
