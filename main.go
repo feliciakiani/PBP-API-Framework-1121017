@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/EksplorasiGin/controllers"
@@ -29,10 +27,6 @@ func main() {
 	router.POST("/login", controllers.Login)
 	router.POST("/logout", controllers.Logout)
 
-	router.Run(":8080")
-	if err := router.Run(":8080"); err != nil {
-		log.Fatalf("Failed to start server: %v", err)
-		fmt.Println("Router couldnt connect")
-	}
+	_ = router.Run(":8080")
 
 }
