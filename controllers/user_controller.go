@@ -70,10 +70,6 @@ func encodeUser(user User) string {
 	return "encoded_user_string"
 }
 
-func decodeUser(str string) (User, error) {
-	return User{}, nil
-}
-
 func ResetCookie(c *gin.Context) {
 
 	cookie := http.Cookie{
