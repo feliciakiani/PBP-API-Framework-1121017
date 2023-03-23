@@ -5,6 +5,7 @@ type Movie struct {
 	Title    string `json:"title"`
 	Duration int    `json:"duration"`
 	Language string `json:"language"`
+	Type     int    `json:"type"`
 }
 
 type User struct {

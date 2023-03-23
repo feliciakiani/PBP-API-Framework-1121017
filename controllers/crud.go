@@ -21,7 +21,7 @@ func GetAllMovies(c *gin.Context) {
 
 	var movie Movie
 	for rows.Next() {
-		if err := rows.Scan(&movie.ID, &movie.Title, &movie.Duration, &movie.Language); err != nil {
+		if err := rows.Scan(&movie.ID, &movie.Title, &movie.Duration, &movie.Language, &movie.Type); err != nil {
 			log.Println(err)
 			c.JSON(400, gin.H{"error": "movies not found"})
 		} else {
@@ -45,7 +45,7 @@ func GetMovie(c *gin.Context) {
 
 	var movie Movie
 	for row.Next() {
-		if err := row.Scan(&movie.ID, &movie.Title, &movie.Duration, &movie.Language); err != nil {
+		if err := row.Scan(&movie.ID, &movie.Title, &movie.Duration, &movie.Language, &movie.Type); err != nil {
 			log.Println(err)
 			c.JSON(400, gin.H{"error": "movies not found"})
 		} else {
@@ -67,10 +67,11 @@ func InsertMovie(c *gin.Context) {
 		return
 	}
 
-	_, err := db.Query("INSERT INTO movie (title, duration, language) VALUES (?,?,?)",
+	_, err := db.Query("INSERT INTO movie (title, duration, language, type) VALUES (?,?,?,?)",
 		movie.Title,
 		movie.Duration,
 		movie.Language,
+		movie.Type,
 	)
 
 	if err != nil {
@@ -95,10 +96,11 @@ func UpdateMovie(c *gin.Context) {
 		return
 	}
 
-	result, err := db.Exec("UPDATE movie SET title=?, duration=?, language=? WHERE id=?",
+	result, err := db.Exec("UPDATE movie SET title=?, duration=?, language=?, type=? WHERE id=?",
 		movie.Title,
 		movie.Duration,
 		movie.Language,
+		movie.Type,
 		movie.ID,
 	)
 
