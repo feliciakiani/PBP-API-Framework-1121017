@@ -7,7 +7,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Preparation
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -27,9 +28,11 @@ jobs:
           coverprofile: coverage.out
           diff: pr.diff
           module: github.com/panagiotisptr/cov-diff
+        env:
+          COV_DIFF: ${{ steps.covdiffaction.outputs.covdiff }}
 
       - name: Comment
         uses: mshick/add-pr-comment@v2
         with:
           message: |
-            Coverage on new code: ${{ steps.covdiffaction.outputs.covdiff }}%
+            Coverage on new code: ${{ env.COV_DIFF }}%
