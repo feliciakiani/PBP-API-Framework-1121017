@@ -28,8 +28,9 @@ jobs:
           coverprofile: coverage.out
           diff: pr.diff
           module: github.com/panagiotisptr/cov-diff
-        env:
-          COV_DIFF: ${{ steps.covdiffaction.outputs.covdiff }}
+          
+      - name: Set coverage diff output
+        run: echo "COVDIFF=${{ steps.covdiffaction.outputs.covdiff }}" >> $GITHUB_ENV
 
       - name: Comment
         uses: mshick/add-pr-comment@v2
